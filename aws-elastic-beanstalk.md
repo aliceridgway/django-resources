@@ -2,6 +2,8 @@
 
 [AWS Elastic Beanstalk](https://docs.aws.amazon.com/elastic-beanstalk/index.html) is a **Platform as a Service (PaaS)** to deploy applications without in-depth knowledge of the infrastructure that runs them.
 
+It supports [deployment from Docker containers](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_docker.html).
+
 ## Terminology
 
 ### Application Version
