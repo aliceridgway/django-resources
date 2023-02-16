@@ -10,8 +10,42 @@ Multiple threads can introduce race conditions where multiple threads attempt to
 
 The GIL means only one thread can have control of the Python intepreter, avoiding the race condition.
 
-It effectively makes Python a single-threaded programming language.
-
 Not all programming languages use a GIL. For example Java uses garbage collection rather than reference counting for memory management. To boost performance, Java uses a **Just in Time (JIT)** compiler. 
 
 Source: [What Is the Python Global Interpreter Lock (GIL)?](https://realpython.com/python-gil)
+
+### CPU-bound vs I/O-bound
+
+CPU-bound threads are where the performance is limited by the hardware the program is running on.
+
+The GIL will prevent two CPU-bound threads from working in parallel. Only one thread can have control of the GIL at a time.
+
+For I/O bound threads, the GIL will share the lock. This means one thread can be processed while another waits for I/O.
+
+### Analogy
+
+There are two queues of people for one ticket office. The ticket office can only serve one person at a time.
+
+For a CPU-bound process, the throughput of people is limited by how quickly the ticket office can serve customers. It doesn't matter if the waiting customers are in one queue or split across two.
+
+For an I/O bound process, imagine a person is ready to be served but they're still looking for their wallet. If there is one queue, then no one can be served while this person searches their bag.
+
+In a multi-threaded process, the ticket office can serve a customer from the other queue while they wait for the slow customer.
+
+In the context of a web application, that slow customer is a process waiting for a database to return the results of a query or a client waiting for the response from an external API.
+
+### Is Django Single-Threaded?
+
+No.
+
+Sychronous and single-threaded are not the same thing.
+
+Asynchronous and multi-threaded are also not the same thing.
+
+## WSGI
+
+[WSGI is not enough anymore - Part 1](https://www.475cumulus.com/single-post/2017/04/03/WSGI-Is-Not-Enough-Anymore)
+[Part 2](https://medium.com/475cumulus/wsgi-is-not-enough-anymore-part-ii-b78b4cfdd09)
+
+
+## The Event Loop
