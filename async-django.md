@@ -1,6 +1,11 @@
 # Async Django
 
-## GIL
+
+## Background
+
+Some understanding of how Python works explains how asynchronous programming can improve the performance of web applications.
+
+### GIL
 
 The **Global Interpreter Lock (GIL)** is a feature of Python that basically means only one line of code can be executed at a time.
 
@@ -48,4 +53,37 @@ Asynchronous and multi-threaded are also not the same thing.
 [Part 2](https://medium.com/475cumulus/wsgi-is-not-enough-anymore-part-ii-b78b4cfdd09)
 
 
-## The Event Loop
+
+## Async Python
+
+Asynchronous support has been part of Python since Version 3.4 (released March 2014) which introduced the `asyncio` library.
+
+Familiarising with the `asyncio` will teach you the basics of async Python and provide a foundation for using async Django.
+
+### Coroutines
+
+A [Coroutine](https://docs.python.org/3/library/asyncio-task.html#coroutines) is an asynchronous function declared with the async/await syntax.
+
+e.g.
+
+```
+async def some_function():
+    await asyncio.sleep(3)
+    print("done!")
+```
+
+Coroutine functions return coroutine objects, so calling them directly would be unhelpful.
+
+Instead, use `asyncio.run()`
+
+
+### The Event Loop
+
+At the heart of the `asyncio` library is the Event Loop, a class which manages the asynchronous execution of coroutines.
+
+With shameless help from ChatGPT, an event loop is:
+
+> An event loop is a programming construct that manages and schedules the execution of asynchronous tasks or coroutines. The event loop runs in a single thread and allows multiple coroutines to run concurrently without blocking the execution of the main thread.
+
+> When a coroutine yields control to the event loop, the event loop can switch to executing another coroutine that is ready to run, thereby allowing multiple coroutines to make progress simultaneously. The event loop manages a queue of coroutines and schedules their execution based on their readiness to run, typically using non-blocking I/O operations or timers.
+
