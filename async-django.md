@@ -39,6 +39,21 @@ In a multi-threaded process, the ticket office can serve a customer from the oth
 
 In the context of a web application, that slow customer is a process waiting for a database to return the results of a query or a client waiting for the response from an external API.
 
+### Multithreading vs Multiprocessing
+
+**Article**: [Multithreading and Multiprocessing in 10 Minutes](https://towardsdatascience.com/multithreading-and-multiprocessing-in-10-minutes-20d9b3c6a867)
+
+The GIL means that only one thread can have control of the Python interpreter at a time.
+
+Multi-threading is the concept of having multiple threads on a single processor.
+
+Multi-processing is the concept of running multiple processors concurrently.
+
+In the context of our analogy, multi-threading is having multiple queues for one ticket office. Multi-processing is the equivalent of having multiple ticket offices.
+
+Python has the [multiprocessing](https://docs.python.org/3/library/multiprocessing.html) library to set up subprocesses. However, you are limited to the number of processors on your machine.
+
+
 ### Is Django Single-Threaded?
 
 No.
@@ -76,6 +91,9 @@ Coroutine functions return coroutine objects, so calling them directly would be 
 
 Instead, use `asyncio.run()`
 
+### Tasks
+
+[Tasks](https://docs.python.org/3/library/asyncio-task.html) are a type of awaitable object. They are used to schedule coroutines concurrently. Coroutines can be scheduled using `asyncio.create_task()`.
 
 ### The Event Loop
 
@@ -83,7 +101,13 @@ At the heart of the `asyncio` library is the Event Loop, a class which manages t
 
 With shameless help from ChatGPT, an event loop is:
 
-> An event loop is a programming construct that manages and schedules the execution of asynchronous tasks or coroutines. The event loop runs in a single thread and allows multiple coroutines to run concurrently without blocking the execution of the main thread.
+> ...a programming construct that manages and schedules the execution of asynchronous tasks or coroutines. The event loop runs in a single thread and allows multiple coroutines to run concurrently without blocking the execution of the main thread.
 
 > When a coroutine yields control to the event loop, the event loop can switch to executing another coroutine that is ready to run, thereby allowing multiple coroutines to make progress simultaneously. The event loop manages a queue of coroutines and schedules their execution based on their readiness to run, typically using non-blocking I/O operations or timers.
+
+## Asynchronous Web
+
+##
+
+
 
